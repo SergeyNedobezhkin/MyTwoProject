@@ -6,19 +6,22 @@ const modal = () => {
 
     const modalMenu = () => {
         let count = 0;
+        let idInterval;
         const animate = () => {
             count++;
-            if (count < 62 && screen.width > 768) {
-                popupContent.style.left = count * 0.624 + '%';
-            } else {
+            idInterval = requestAnimationFrame(animate);
+
+            if (count < 41 && screen.width > 768) {
+                popupContent.style.left = count * 1 + '%';
+            } else if (count > 41 && screen.width < 768) {
                 popupContent.style.left = " ";
+            } else {
+                cancelAnimationFrame(idInterval);
             }
         };
-        setInterval(animate, 2);
+        animate();
     };
-
     buttons.forEach(btn => {
-
         btn.addEventListener('click', () => {
             modal.style.display = 'block';
             modalMenu();
