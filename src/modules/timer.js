@@ -1,5 +1,4 @@
-
-let idInterval = 0;
+"use strict";
 
 const timer = deadline => {
     const timerHours = document.getElementById('timer-hours');
