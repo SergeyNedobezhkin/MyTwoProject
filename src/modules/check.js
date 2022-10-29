@@ -1,7 +1,7 @@
 "use strict";
-const calculator = () => {
+const check = () => {
 
-    const calc = () => {
+    const checked = () => {
         const calcBlock = document.querySelector('.calc-block');
 
         const calcSquare = calcBlock.querySelector('.calc-square');
@@ -46,6 +46,6 @@ const calculator = () => {
         formEmail[1].addEventListener('input', addEmail);
         formEmail[2].addEventListener('input', addEmail);
     };
-    calc();
+    checked();
 };
-export default calculator;
+export default check;
