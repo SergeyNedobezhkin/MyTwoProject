@@ -34,8 +34,6 @@ const timer = deadline => {
             timerSeconds.textContent = addZero(getTime.seconds);
         } else if (getTime.timeRemaining <= 0) {
             clearInterval(idInterval);
-            // const dateStop = new Date(deadline);
-            // dateStop.setDate(dateStop.getDate() + 1);
             timerHours.textContent = '00';
             timerMinutes.textContent = '00';
             timerSeconds.textContent = '00';
