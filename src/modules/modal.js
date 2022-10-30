@@ -3,6 +3,7 @@ const modal = () => {
     const buttons = document.querySelectorAll('.popup-btn');
     const closeBtn = modal.querySelector('.popup-close');
     const popupContent = document.querySelector('.popup-content');
+    
 
     const modalMenu = () => {
         let count = 0;
@@ -32,5 +33,6 @@ const modal = () => {
         });
 
     });
+    
 };
 export default modal;
