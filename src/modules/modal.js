@@ -30,7 +30,6 @@ const modal = () => {
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
-
     });
 };
 export default modal;
