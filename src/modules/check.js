@@ -3,48 +3,45 @@ const check = () => {
 
     const checked = () => {
         const calcBlock = document.querySelector('.calc-block');
-
-        const calcSquare = calcBlock.querySelector('.calc-square');
-        const calcCount = calcBlock.querySelector('.calc-count');
-        const calcDay = calcBlock.querySelector('.calc-day');
+        const calcInput = calcBlock.querySelectorAll('input[type = text]');
         const mes = document.querySelector('.mess');
-        const formName = document.querySelectorAll('.form-name');
-        const topForm = document.querySelector('.top-form');
-        const formEmail = document.querySelectorAll('.form-email');
-        const formPhone = document.querySelectorAll('.form-phone');
+        const formName = document.querySelectorAll('input[placeholder="Ваше имя"]');
+        const formEmail = document.querySelectorAll('input[placeholder="E-mail"]');
+        const formPhone = document.querySelectorAll('input[placeholder="Номер телефона"]');
 
-        const addNumber = (e) => {
-            e.target.value = e.target.value.replace(/\D+/, "");
-            console.log(e.target.value = e.target.value.replace(/\D+/, ""));
+        const addNumber = (event) => {
+            event.target.value = event.target.value.replace(/\D+/, "");
+            console.log(event.target.value = event.target.value.replace(/\D+/, ""));
         };
 
-        const addText = (e) => {
-            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁ\-\\" "]/gi, "");
+        const addText = (event) => {
+            event.target.value = event.target.value.replace(/[^а-яё\- ]/gi, "");
         };
-        const addEmail = (e) => {
-            e.target.value = e.target.value.replace(/[^a-z\-\!@-_.!~*'\" "]/gi, "");
-        };
-
-        const addPhone = (e) => {
-            e.target.value = e.target.value.replace(/[^0-9()-]/gi, "");
+        const addEmail = (event) => {
+            event.target.value = event.target.value.replace(/[^a-z0-9\-!@_.!~*']/gi, "");
         };
 
-        calcSquare.addEventListener('input', addNumber);
-        calcCount.addEventListener('input', addNumber);
-        calcDay.addEventListener('input', addNumber);
+        const addPhone = (event) => {
+            event.target.value = event.target.value.replace(/[^0-9()-]/gi, "");
+        };
 
         mes.addEventListener('input', addText);
-        formName[0].addEventListener('input', addText);
-        formName[1].addEventListener('input', addText);
-        topForm.addEventListener('input', addText);
 
-        formPhone[0].addEventListener('input', addPhone);
-        formPhone[1].addEventListener('input', addPhone);
-        formPhone[2].addEventListener('input', addPhone);
+        calcInput.forEach(item => {
+            item.addEventListener('input', addNumber);
+        });
 
-        formEmail[0].addEventListener('input', addEmail);
-        formEmail[1].addEventListener('input', addEmail);
-        formEmail[2].addEventListener('input', addEmail);
+        formName.forEach(item => {
+            item.addEventListener('input', addText);
+        });
+
+        formPhone.forEach(item => {
+            item.addEventListener('input', addPhone);
+        });
+
+        formEmail.forEach(item => {
+            item.addEventListener('input', addEmail);
+        });
     };
     checked();
 };
