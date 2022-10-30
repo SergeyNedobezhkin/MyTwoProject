@@ -41,7 +41,6 @@ const timer = deadline => {
     updateClock();
     idInterval = setInterval(updateClock, 1000);
 };
-
 export default timer;
 
 

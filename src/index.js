@@ -3,7 +3,7 @@ import timer from './modules/timer';
 import menu from './modules/menu';
 import modal from './modules/modal';
 import check from './modules/check';
-timer('31 october 2022');
+timer('5 nov 2022');
 menu();
 modal();
 check();

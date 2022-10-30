@@ -1,5 +1,4 @@
 const menu = () => {
-
     const menuBig = () => {
         const menuBtn = document.querySelector('.menu');
         const menu = document.querySelector('menu');
@@ -10,9 +9,7 @@ const menu = () => {
             menu.classList.toggle('active-menu');
         };
 
-
         menuBtn.addEventListener('click', handlerMenu);
-
         closeBtn.addEventListener('click', handlerMenu);
 
         menuItems.forEach(elem => {
@@ -20,6 +17,5 @@ const menu = () => {
         });
     };
     menuBig();
-
 };
 export default menu;
