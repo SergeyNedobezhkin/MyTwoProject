@@ -5,9 +5,9 @@ const check = () => {
         const calcBlock = document.querySelector('.calc-block');
         const calcInput = calcBlock.querySelectorAll('input[type = text]');
         const mes = document.querySelector('.mess');
-        const formName = document.querySelectorAll('input[placeholder="Ваше имя"]');
-        const formEmail = document.querySelectorAll('input[placeholder="E-mail"]');
-        const formPhone = document.querySelectorAll('input[placeholder="Номер телефона"]');
+        const formName = document.querySelectorAll('[name="user_name"]');
+        const formEmail = document.querySelectorAll('[name="user_email"]');
+        const formPhone = document.querySelectorAll('[name="user_phone"]');
 
         const addNumber = (event) => {
             event.target.value = event.target.value.replace(/\D+/, "");

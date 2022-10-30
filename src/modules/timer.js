@@ -38,6 +38,7 @@ const timer = deadline => {
             timerSeconds.textContent = '00';
         }
     };
+    updateClock();
     idInterval = setInterval(updateClock, 1000);
 };
 
