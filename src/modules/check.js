@@ -11,12 +11,12 @@ const check = () => {
 
         const addNumber = (event) => {
             event.target.value = event.target.value.replace(/\D+/, "");
-            console.log(event.target.value = event.target.value.replace(/\D+/, ""));
         };
 
         const addText = (event) => {
             event.target.value = event.target.value.replace(/[^а-яё\- ]/gi, "");
         };
+
         const addEmail = (event) => {
             event.target.value = event.target.value.replace(/[^a-z0-9\-!@_.!~*']/gi, "");
         };
