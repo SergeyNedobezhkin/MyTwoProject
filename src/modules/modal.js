@@ -26,7 +26,6 @@ const modal = () => {
             modal.style.display = 'block';
             modalMenu();
         });
-
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
