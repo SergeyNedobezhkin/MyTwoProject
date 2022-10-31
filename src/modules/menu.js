@@ -4,7 +4,7 @@ const menu = () => {
         const menu = document.querySelector('menu');
         const closeBtn = document.querySelector('.close-btn');
 
-        const funcMenu = (e) => {
+        document.body.addEventListener('click', e => {
             if (e.target.closest('.menu') === menuBtn) {
                 menu.classList.toggle('active-menu');
             } else if ((e.target === closeBtn) || (e.target.closest('ul>li>a')) || (!e.target.closest('menu'))) {
@@ -12,8 +12,7 @@ const menu = () => {
             } else {
                 return;
             }
-        };
-        document.body.addEventListener('click', funcMenu);
+        });
     };
     menuBig();
 };
