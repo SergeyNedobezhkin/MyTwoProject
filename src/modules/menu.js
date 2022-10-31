@@ -6,11 +6,11 @@ const menu = () => {
 
         document.body.addEventListener('click', e => {
             if (e.target.closest('.menu') === menuBtn) {
-                menu.classList.toggle('active-menu');
-            } else if ((e.target === closeBtn) || (e.target.closest('ul>li>a')) || (!e.target.closest('menu'))) {
-                menu.classList.remove('active-menu');
-            } else {
-                return;
+                return menu.classList.toggle('active-menu');
+            }
+
+            if ((e.target === closeBtn) || (e.target.closest('ul>li>a')) || (!e.target.closest('menu'))) {
+                return menu.classList.remove('active-menu');
             }
         });
     };
