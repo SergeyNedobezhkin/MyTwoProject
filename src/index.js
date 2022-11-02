@@ -12,4 +12,4 @@ modal();
 check();
 tabs();
 slider();
-calc(100);
+calc();

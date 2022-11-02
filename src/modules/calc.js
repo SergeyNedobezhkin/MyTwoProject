@@ -1,4 +1,5 @@
-const calc = (price = 100) => {
+"use strict";
+const calc = (price) => {
     const calcBlock = document.querySelector('.calc-block');
     const calcType = document.querySelector('.calc-type');
     const calcSquare = document.querySelector('.calc-square');
@@ -9,12 +10,22 @@ const calc = (price = 100) => {
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
         const calcSquareValue = +calcSquare.value;
-
         let totalValue = 0;
         let calcCountValue = 1;
         let calcDayValue = 1;
 
+        if (calcTypeValue === 1) {
+            price = 100;
+        }
+        if (calcTypeValue === 1.4) {
+            price = 120;
+        }
+        if (calcTypeValue === 2) {
+            price = 110;
+        }
+
         if (calcCount.value > 1) {
+
             calcCountValue += +calcCount.value / 10;
         }
 
@@ -25,7 +36,7 @@ const calc = (price = 100) => {
         }
 
         if (calcTypeValue && calcTypeValue) {
-            totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
+            totalValue = Math.ceil(price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue);
         } else {
             totalValue = 0;
         }
