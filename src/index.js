@@ -14,6 +14,5 @@ check();
 tabs();
 slider();
 calc();
-fieldValidator(document.querySelectorAll('[name="user_name"]'),document.querySelectorAll('[name="user_email"]'),
-document.querySelectorAll('[name="user_phone"]'));
+fieldValidator();
 
