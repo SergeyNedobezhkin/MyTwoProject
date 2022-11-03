@@ -1,5 +1,4 @@
 
-
 const animate = () => {
     const popupContent = document.querySelector('.popup-content');
     
