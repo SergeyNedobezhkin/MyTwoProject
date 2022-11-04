@@ -2,8 +2,18 @@ import { animate } from "./helpers";
 const modal = () => {
     const modal = document.querySelector('.popup');
     const buttons = document.querySelectorAll('.popup-btn');
-
+    const popupContent = document.querySelector('.popup-content');
     const modalMenu = () => {
+        animate({
+            duration: 500,
+            timing(timeFraction) {
+                return timeFraction;
+            },
+            draw(progress) {
+                popupContent.style.left = (42 * progress) + '%';
+                popupContent.style.top = (25 * progress) + '%';
+            }
+        });
         animate();
     };
     buttons.forEach(btn => {

@@ -1,20 +1,15 @@
-const animate = () => {
-    const popupContent = document.querySelector('.popup-content');  
-    let count = 0;
-    let idInterval;
-    const animate = () => {
-        count++;
-        idInterval = requestAnimationFrame(animate);
-
-        if (count < 41 && screen.width > 768) {
-            popupContent.style.left = count * 1 + '%';
-        } else if (count > 41 && screen.width < 768) {
-            popupContent.style.left = " ";
-        } else {
-            cancelAnimationFrame(idInterval);
+const animate = ({ timing, draw, duration }) => {
+    let start = performance.now();
+    requestAnimationFrame(function animate(time) {
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) {
+            timeFraction = 1;
         }
-    };
-    animate();
+        let progress = timing(timeFraction);
+        draw(progress);
+        if (timeFraction < 1) {
+            requestAnimationFrame(animate);
+        }
+    });
 };
-
-export { animate };
+export { animate };   
