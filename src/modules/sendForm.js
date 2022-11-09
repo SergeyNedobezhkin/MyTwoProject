@@ -100,7 +100,6 @@ const sendForm = ({ formId, someElem = [] }) => {
                 e.target.classList.add("error");
                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
             }
-
             if (isValidMess === true) {
                 e.target.classList.remove("error");
                 e.target.style = '';
@@ -129,7 +128,6 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
         });
         return success;
-
     };
 
     const sendData = (data) => {
@@ -168,7 +166,6 @@ const sendForm = ({ formId, someElem = [] }) => {
                 statusBlock.textContent = successText;
                 formElements.forEach(input => {
                     input.value = '';
-
                 });
             })
                 .catch(error => {
@@ -183,7 +180,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         if (!form) {
             throw new Error('Верните форму на место, пожалуйста!!!');
         }
-
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             submitForm();
