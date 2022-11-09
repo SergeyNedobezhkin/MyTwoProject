@@ -1,4 +1,4 @@
-import { animate } from "./helpers";
+import {animate} from "./helpers";
 const modal = () => {
     const modal = document.querySelector('.popup');
     const buttons = document.querySelectorAll('.popup-btn');
@@ -14,7 +14,6 @@ const modal = () => {
                 popupContent.style.top = (25 * progress) + '%';
             }
         });
-        animate();
     };
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {

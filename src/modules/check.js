@@ -8,13 +8,18 @@ const check = () => {
         const formName = document.querySelectorAll('[name="user_name"]');
         const formEmail = document.querySelectorAll('[name="user_email"]');
         const formPhone = document.querySelectorAll('[name="user_phone"]');
-
+  
         const addNumber = (event) => {
             event.target.value = event.target.value.replace(/\D+/, "");
         };
 
         const addText = (event) => {
-            event.target.value = event.target.value.replace(/[^а-яё\- ]/gi, "");
+            event.target.value = event.target.value.replace(/[^а-яё\- ?!,.0-9]/gi, "");
+           
+        };
+        const addName = (event) => {
+            event.target.value = event.target.value.replace(/[^а-яё\ ]/gi, "");
+           
         };
 
         const addEmail = (event) => {
@@ -22,17 +27,18 @@ const check = () => {
         };
 
         const addPhone = (event) => {
-            event.target.value = event.target.value.replace(/[^0-9()-]/gi, "");
+            event.target.value = event.target.value.replace(/[^0-9()-/+]/gi, "");
         };
 
         mes.addEventListener('input', addText);
 
         calcInput.forEach(item => {
             item.addEventListener('input', addNumber);
+            
         });
 
         formName.forEach(item => {
-            item.addEventListener('input', addText);
+            item.addEventListener('input', addName);
         });
 
         formPhone.forEach(item => {
