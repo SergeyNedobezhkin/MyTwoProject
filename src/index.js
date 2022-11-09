@@ -6,7 +6,6 @@ import check from './modules/check';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calc';
-// import fieldValidator from './modules/fieldValidator';
 import sendForm from './modules/sendForm';
 timer('8 nov 2022');
 menu();
@@ -15,9 +14,7 @@ check();
 tabs();
 slider();
 calc();
-
 sendForm({ formId:'form1', someElem:[{  type: 'block', id: 'total'}]});
 sendForm({ formId:'form3', someElem:[{  type: 'block', id: 'total'}]});
 sendForm({ formId:'form2', someElem:[{  type: 'block', id: 'total'}]});
-// fieldValidator();
 
