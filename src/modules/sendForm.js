@@ -9,7 +9,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formPhone = form.querySelector('[name="user_phone"]');
     const formMess = document.querySelector('[name="user_message"]');
 
-    formName.addEventListener('input', (e) => {
+    const checkName = (e) => {
         if (e.target === formName) {
             let value = e.target.value;
             let isValidName = validName(value);
@@ -27,7 +27,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(isValidName);
         }
-    });
+    };
 
     const validName = (value) => {
         if (value.length <= 2) {
@@ -38,7 +38,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         }
     };
 
-    formEmail.addEventListener('input', (e) => {
+    const checkEmail = (e) => {
         if (e.target === formEmail) {
             let value = e.target.value;
             let isValidEmail = validEmail(value);
@@ -54,7 +54,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(isValidEmail);
         }
-    });
+    };
 
     const validEmail = (value) => {
         if (value === value.replace(/^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i, "")) {
@@ -64,7 +64,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         }
     };
 
-    formPhone.addEventListener('input', (e) => {
+    const checkPhone = (e) => {
         if (e.target === formPhone) {
             let value = e.target.value;
             let isValidPhone = validPhone(value);
@@ -80,7 +80,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(isValidPhone);
         }
-    });
+    };
 
     const validPhone = (value) => {
         if (value === value.replace(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/i, "")) {
@@ -90,7 +90,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         }
     };
 
-    formMess.addEventListener('input', (e) => {
+    const checkMess = (e) => {
         if (e.target === formMess) {
             let value = e.target.value;
             let isValidMess = validMess(value);
@@ -100,6 +100,7 @@ const sendForm = ({ formId, someElem = [] }) => {
                 e.target.classList.add("error");
                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
             }
+
             if (isValidMess === true) {
                 e.target.classList.remove("error");
                 e.target.style = '';
@@ -107,13 +108,12 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(isValidMess);
         }
-    });
+    };
 
     const validMess = (value) => {
         if (value === value.replace(/[^а-яё\- ?!,.]/gi, "")) {
             return true;
         }
-
         if (value !== value.replace(/[^а-яё\- ?!,.]/gi, "")) {
             return false;
         }
@@ -143,7 +143,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     const submitForm = () => {
         const formElements = form.querySelectorAll('input');
         const formData = new FormData(form);
-
         const formBody = {};
 
         statusBlock.textContent = loadText;
@@ -187,8 +186,12 @@ const sendForm = ({ formId, someElem = [] }) => {
     } catch (error) {
         console.log(error.message);
     }
-};
 
+    formName.addEventListener('input', checkName);
+    formEmail.addEventListener('input', checkEmail);
+    formPhone.addEventListener('input', checkPhone);
+    formMess.addEventListener('input', checkMess);
+};
 export default sendForm;
 
 
