@@ -9,7 +9,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     const successText = 'Спасибо! Наш менеджер с вами свяжется!';
 
     const isValid = (e) => {
-        e.preventDefault();
         if (e.target.matches('[name="user_name"]')) {
             let value = e.target.value;
             if (value.replace(/^[а-яё][а-яё\' ']{1,20}$/gi, "")) {
@@ -102,7 +101,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
 
-
             if (elem.type === 'block' && element.textContent !== '0') {
                 formBody[elem.id] = element.textContent;
             }
@@ -126,6 +124,7 @@ const sendForm = ({ formId, someElem = [] }) => {
                 });
         } else {
             statusBlock.textContent = "";
+            // alert('Данные не валидны!!!');
         }
     };
     try {
@@ -141,9 +140,5 @@ const sendForm = ({ formId, someElem = [] }) => {
     }
 
     form.addEventListener('input', isValid);
-
 };
 export default sendForm;
-
-
-
