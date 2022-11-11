@@ -1,135 +1,79 @@
+// import {valid} from "./helpers";
 const sendForm = ({ formId, someElem = [] }) => {
     const form = document.getElementById(formId);
+    form.querySelector('[name="user_email"]').setAttribute("required", '');
+    document.querySelector('[name="user_message"]').classList.add("success");
     const statusBlock = document.createElement('div');
-    const loadText = 'Загрузка...';
-    const errorText = 'Ошибка...';
+    let loadText = 'Загрузка...';
+    let errorText = 'Ошибка...';
     const successText = 'Спасибо! Наш менеджер с вами свяжется!';
-    const formName = form.querySelector('[name="user_name"]');
-    const formEmail = form.querySelector('[name="user_email"]');
-    const formPhone = form.querySelector('[name="user_phone"]');
-    const formMess = document.querySelector('[name="user_message"]');
 
-    const checkName = (e) => {
-        if (e.target === formName) {
+    const isValid = (e) => {
+        e.preventDefault();
+        if (e.target.matches('[name="user_name"]')) {
             let value = e.target.value;
-            let isValidName = validName(value);
-
-            if (isValidName === false) {
+            if (value.replace(/^[а-яё][а-яё\' ']{1,20}$/gi, "")) {
                 e.target.classList.remove("success");
                 e.target.classList.add("error");
                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+                value = false;
             }
-
-            if (isValidName === true) {
+            else if (!value.replace(/^[а-яё][а-яё\' ']{1,20}$/gi, "")) {
                 e.target.classList.remove("error");
                 e.target.style = '';
                 e.target.classList.add("success");
+                value = true;
             }
-            return validate(isValidName);
+            return validate(value);
         }
-    };
-
-    const validName = (value) => {
-        if (value.length <= 2) {
-            return false;
-        }
-        if (value.length > 2) {
-            return true;
-        }
-    };
-
-    const checkEmail = (e) => {
-        if (e.target === formEmail) {
+        if (e.target.matches('[name="user_email"]')) {
             let value = e.target.value;
-            let isValidEmail = validEmail(value);
 
-            if (isValidEmail === false) {
+            if (value.replace(/^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i, '')) {
                 e.target.classList.remove("success");
                 e.target.classList.add("error");
                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
-            } if (isValidEmail === true) {
+                value = false;
+            }
+            else if (!value.replace(/^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i, '')) {
                 e.target.classList.remove("error");
                 e.target.style = '';
                 e.target.classList.add("success");
+                value = true;
             }
-            return validate(isValidEmail);
+            return validate(value);
         }
-    };
-
-    const validEmail = (value) => {
-        if (value === value.replace(/^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i, "")) {
-            return false;
-        } else {
-            return true;
-        }
-    };
-
-    const checkPhone = (e) => {
-        if (e.target === formPhone) {
+        if (e.target.matches('[name="user_phone"]')) {
             let value = e.target.value;
-            let isValidPhone = validPhone(value);
-
-            if (isValidPhone === false) {
+            if (value.replace(/^\+?[78][-\(]?\d{3}\)?-?\d{0,3}-?\d{2}-?\d{0,2}$/i, '')) {
                 e.target.classList.remove("success");
                 e.target.classList.add("error");
                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
-            } if (isValidPhone === true) {
-                e.target.classList.remove("error");
-                e.target.style = '';
-                e.target.classList.add("success");
+                value = false;
             }
-            return validate(isValidPhone);
-        }
-    };
-
-    const validPhone = (value) => {
-        if (value === value.replace(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/i, "")) {
-            return false;
-        } else {
-            return true;
-        }
-    };
-
-    const checkMess = (e) => {
-        if (e.target === formMess) {
-            let value = e.target.value;
-            let isValidMess = validMess(value);
-
-            if (isValidMess === false) {
-                e.target.classList.remove("success");
-                e.target.classList.add("error");
-                e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+            else if (!value.replace(/^\+?[78][-\(]?\d{3}\)?-?\d{0,3}-?\d{2}-?\d{0,2}$/i, '')) {
+                {
+                    e.target.classList.remove("error");
+                    e.target.style = '';
+                    e.target.classList.add("success");
+                    value = true;
+                }
             }
-
-            if (isValidMess === true) {
-                e.target.classList.remove("error");
-                e.target.style = '';
-                e.target.classList.add("success");
-            }
-            return validate(isValidMess);
-        }
-    };
-
-    const validMess = (value) => {
-        if (value === value.replace(/[^а-яё\- ?!,.]/gi, "")) {
-            return true;
-        }
-        if (value !== value.replace(/[^а-яё\- ?!,.]/gi, "")) {
-            return false;
+            return validate(value);
         }
     };
 
     const validate = (list) => {
+
         let success = true;
         Array.from(list).forEach(input => {
-            console.log(input);
             if (!input.classList.contains('success')) {
                 success = false;
             }
         });
         return success;
     };
-
+    // Отправленние данных
     const sendData = (data) => {
         return fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
@@ -139,42 +83,52 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
         }).then(res => res.json());
     };
-
+// Отправить форму
     const submitForm = () => {
         const formElements = form.querySelectorAll('input');
         const formData = new FormData(form);
         const formBody = {};
 
-        statusBlock.textContent = loadText;
-        form.append(statusBlock);
         formData.forEach((val, key) => {
-            formBody[key] = val;
+            statusBlock.textContent = loadText;
+
+            if(val !== ''){ 
+                formBody[key] = val;
+            }
+            statusBlock.style = "color: white;";
+            form.append(statusBlock);
         });
 
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
-            if (elem.type === 'block') {
+
+
+            if (elem.type === 'block' && element.textContent !== '0') {
                 formBody[elem.id] = element.textContent;
-            } else if (elem.type === 'input') {
+            }
+            else if (elem.type === 'input') {
                 formBody[elem.id] = element.value;
             }
-        });
 
+        });
+        // Отправленные данные
         if (validate(formElements)) {
-            sendData(formBody).then(data => {
-                statusBlock.textContent = successText;
-                formElements.forEach(input => {
-                    input.value = '';
-                });
-            })
+            sendData(formBody)
+                .then(data => {
+                    statusBlock.textContent = successText;
+
+                    formElements.forEach(input => {
+                        input.value = '';
+                    });
+                })
                 .catch(error => {
                     statusBlock.textContent = errorText;
                 });
         } else {
-            alert('Данные не валидны!!!');
+            statusBlock.textContent = "";
+            // alert('Данные не валидны!!!');
         }
     };
-
     try {
         if (!form) {
             throw new Error('Верните форму на место, пожалуйста!!!');
@@ -187,11 +141,229 @@ const sendForm = ({ formId, someElem = [] }) => {
         console.log(error.message);
     }
 
-    formName.addEventListener('input', checkName);
-    formEmail.addEventListener('input', checkEmail);
-    formPhone.addEventListener('input', checkPhone);
-    formMess.addEventListener('input', checkMess);
+    form.addEventListener('input', isValid);
+
 };
 export default sendForm;
+
+
+
+// // import {valid} from "./helpers";
+// const sendForm = ({ formId, someElem = [] }) => {
+//     const form = document.getElementById(formId);
+//     const statusBlock = document.createElement('div');
+//    let loadText = 'Загрузка...';
+//     let errorText = 'Ошибка...';
+//     const successText = 'Спасибо! Наш менеджер с вами свяжется!';
+//     const formName = form.querySelector('[name="user_name"]');
+//     const formEmail = form.querySelector('[name="user_email"]');
+//     const formPhone = form.querySelector('[name="user_phone"]');
+//     const formMess = document.querySelector('[name="user_message"]');
+
+//     const checkName = (e) => {
+//         if (e.target === formName) {
+//             let value = e.target.value;
+//             let isValidName = validName(value);
+
+//             if (isValidName === false) {
+//                 e.target.classList.remove("success");
+//                 e.target.classList.add("error");
+//                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+//             }
+
+//             if (isValidName === true) {
+//                 e.target.classList.remove("error");
+//                 e.target.style = '';
+//                 e.target.classList.add("success");
+                
+//             }
+//             return validate(isValidName);
+//         }
+//     };
+
+//     const validName = (value) => {
+//         if (value.length <= 2) {
+//             return false;
+//         }
+//         if (value.length > 2) {
+//             return true;
+//         }
+//     };
+
+//     const checkEmail = (e) => {
+//         if (e.target === formEmail) {
+//             let value = e.target.value;
+//             let isValidEmail = validEmail(value);
+//             if (isValidEmail === true) {
+//                 e.target.classList.remove("error");
+//                 e.target.style = '';
+//                 e.target.classList.add("success");
+//             }
+//             if (isValidEmail === false) {
+//                 e.target.classList.remove("success");
+//                 e.target.classList.add("error");
+//                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+//             } 
+//             return validate(isValidEmail);
+//         }
+//     };
+
+//     const validEmail = (value) => {
+//         if (value === value.replace(/^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i, "")) {
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     };
+
+//     const checkPhone = (e) => {
+//         if (e.target === formPhone) {
+//             let value = e.target.value;
+//             let isValidPhone = validPhone(value);
+//             if (isValidPhone === true) {
+//                 e.target.classList.remove("error");
+//                 e.target.style = '';
+//                 e.target.classList.add("success");
+//             }
+//             if (isValidPhone === false) {
+//                 e.target.classList.remove("success");
+//                 e.target.classList.add("error");
+//                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+//             } 
+//             return validate(isValidPhone);
+//         }
+//     };
+
+//     const validPhone = (value) => {
+//         if (value === value.replace(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/i, "")) {
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     };
+
+
+//     const checkMess = (e) => {
+//         if (e.target === formMess) {
+//             let value = e.target.value;
+//             let isValidMess = validMess(value);
+            
+//             if (isValidMess === true) {
+//                 e.target.classList.remove("error");
+//                 e.target.style = '';
+//                 e.target.classList.add("success");
+//             }
+
+//             if (isValidMess === false) {
+//                 e.target.classList.remove("success");
+//                 e.target.classList.add("error");
+//                 e.target.style = 'border:solid; border-width: 5px; border-color: red;';
+//             }
+
+        
+//             return validate(isValidMess);
+//         }
+//     };
+
+//     const validMess = (value) => {
+//         console.log(typeof value);
+//         if (value === value.replace(/[^а-яё\- ?!,.]/gi, "")) {
+//             return true;
+//         }
+//         if (value !== value.replace(/[^а-яё\- ?!,.]/gi,"")) {
+//             return false;
+//         }
+//     };
+
+
+    
+//     const validate = (list) => {
+//         let success = true;
+//         Array.from(list).forEach(input => {
+           
+//             if (!input.classList.contains('success')) {
+//                 success = false;
+//             }
+//         });
+//         return success;
+//     };
+
+
+    
+//     const sendData = (data) => {
+//         return fetch('https://jsonplaceholder.typicode.com/posts', {
+//             method: 'POST',
+//             body: JSON.stringify(data),
+//             headers: {
+//                 'Content-type': 'application/json'
+//             }
+//         }).then(res => res.json());
+//     };
+
+//     const submitForm = () => {
+//         const formElements = form.querySelectorAll('input');
+//         const formData = new FormData(form);
+//         const formBody = {};
+    
+//         formData.forEach((val, key) => {
+//             statusBlock.textContent = loadText;
+//             formBody[key] = val;
+        
+//             statusBlock.style = "color: white;";
+
+//             form.append(statusBlock);
+//         });
+
+//         someElem.forEach(elem => {
+//             const element = document.getElementById(elem.id);
+//             if (elem.type === 'block' && element.textContent !== '0') {
+//                 formBody[elem.id] = element.textContent; 
+//             }  
+//             else if (elem.type === 'input') {
+//                 formBody[elem.id] = element.value;
+//             }
+//         });
+
+//         if (validate(formElements)) {
+//             sendData(formBody).then(data => {
+             
+                
+//                 statusBlock.textContent = successText;
+              
+//                 formElements.forEach(input => {
+                  
+//                 input.value = '';
+//                 });
+//             })
+//                 .catch(error => {
+//                     statusBlock.textContent = errorText;
+//                 });
+//         } else {
+//             alert('Данные не валидны!!!');
+//         }
+//     };
+
+//     try {
+//         if (!form) {
+//             throw new Error('Верните форму на место, пожалуйста!!!');
+//         }
+//         form.addEventListener('submit', (e) => {
+//             e.preventDefault();
+//             submitForm();
+//         });
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+//     // form.addEventListener('input', isValid);
+
+//     formName.addEventListener('input', checkName);
+//     formEmail.addEventListener('input', checkEmail);
+//     formPhone.addEventListener('input', checkPhone);
+//     formMess.addEventListener('input', checkMess);
+// };
+// export default sendForm;
+
+
+
 
 

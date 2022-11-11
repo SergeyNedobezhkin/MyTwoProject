@@ -14,12 +14,11 @@ const check = () => {
         };
 
         const addText = (event) => {
-            event.target.value = event.target.value.replace(/[^а-яё\- ?!,.0-9]/gi, "");
+            event.target.value = event.target.value.replace(/[^а-яё\- ?!,.0-9]/gi,"");
            
         };
         const addName = (event) => {
             event.target.value = event.target.value.replace(/[^а-яё\ ]/gi, "");
-           
         };
 
         const addEmail = (event) => {
