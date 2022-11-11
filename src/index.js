@@ -18,3 +18,4 @@ sendForm({ formId:'form1', someElem:[{  type: 'block', id: 'total'}]});
 sendForm({ formId:'form3', someElem:[{  type: 'block', id: 'total'}]});
 sendForm({ formId:'form2', someElem:[{  type: 'block', id: 'total'}]});
 
+

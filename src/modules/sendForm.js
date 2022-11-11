@@ -25,6 +25,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(value);
         }
+    
         if (e.target.matches('[name="user_email"]')) {
             let value = e.target.value;
 
@@ -61,7 +62,6 @@ const sendForm = ({ formId, someElem = [] }) => {
             return validate(value);
         }
     };
-
     const validate = (list) => {
 
         let success = true;
@@ -107,7 +107,6 @@ const sendForm = ({ formId, someElem = [] }) => {
             else if (elem.type === 'input') {
                 formBody[elem.id] = element.value;
             }
-
         });
         // Отправленные данные
         if (validate(formElements)) {
@@ -124,7 +123,7 @@ const sendForm = ({ formId, someElem = [] }) => {
                 });
         } else {
             statusBlock.textContent = "";
-            // alert('Данные не валидны!!!');
+
         }
     };
     try {
@@ -140,5 +139,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     }
 
     form.addEventListener('input', isValid);
+
 };
 export default sendForm;

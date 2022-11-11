@@ -23,10 +23,12 @@ const check = () => {
 
         const addEmail = (event) => {
             event.target.value = event.target.value.replace(/[^a-z0-9\-!@_.!~*']/gi, "");
+         
         };
 
         const addPhone = (event) => {
-            event.target.value = event.target.value.replace(/[^0-9()-/+]/gi, "");
+            event.target.value = event.target.value.replace(/[^0-9()/+-]/gi, "");
+       
         };
 
         mes.addEventListener('input', addText);
