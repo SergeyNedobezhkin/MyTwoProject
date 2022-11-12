@@ -1,4 +1,3 @@
-
 const sendForm = ({ formId, someElem = [] }) => {
     const form = document.getElementById(formId);
     form.querySelector('[name="user_email"]').setAttribute("required", '');
@@ -25,7 +24,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
             return validate(value);
         }
-    
+
         if (e.target.matches('[name="user_email"]')) {
             let value = e.target.value;
 
@@ -82,7 +81,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             }
         }).then(res => res.json());
     };
-// Отправить форму
+    // Отправить форму
     const submitForm = () => {
         const formElements = form.querySelectorAll('input');
         const formData = new FormData(form);
@@ -91,13 +90,14 @@ const sendForm = ({ formId, someElem = [] }) => {
         formData.forEach((val, key) => {
             statusBlock.textContent = loadText;
 
-            if(val !== ''){ 
+            if (val !== '') {
                 formBody[key] = val;
             }
             statusBlock.style = "color: white;";
             form.append(statusBlock);
-        });
 
+        });
+       
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
 
@@ -112,8 +112,13 @@ const sendForm = ({ formId, someElem = [] }) => {
         if (validate(formElements)) {
             sendData(formBody)
                 .then(data => {
-                    statusBlock.textContent = successText;
-
+                       statusBlock.textContent = successText;
+                    if (statusBlock.textContent === successText) {
+                        setTimeout(function () {                     
+                        statusBlock.style.display = 'none';
+                        },3000);
+                    }
+                 
                     formElements.forEach(input => {
                         input.value = '';
                     });
