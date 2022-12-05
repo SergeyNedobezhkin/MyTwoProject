@@ -97,7 +97,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             form.append(statusBlock);
 
         });
-       
+
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
 
@@ -112,13 +112,13 @@ const sendForm = ({ formId, someElem = [] }) => {
         if (validate(formElements)) {
             sendData(formBody)
                 .then(data => {
-                       statusBlock.textContent = successText;
+                    statusBlock.textContent = successText;
                     if (statusBlock.textContent === successText) {
-                        setTimeout(function () {                     
-                        statusBlock.style.display = 'none';
-                        },3000);
+                        setTimeout(function () {
+                            statusBlock.style.display = 'none';
+                        }, 3000);
                     }
-                 
+
                     formElements.forEach(input => {
                         input.value = '';
                     });
